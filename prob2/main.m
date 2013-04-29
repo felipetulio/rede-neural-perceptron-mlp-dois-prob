@@ -1,0 +1,48 @@
+fprintf('+------------------------------------------------------------------------+\n');
+fprintf('|                         INTELIGÊNCIA COMPUTACIONAL                     |\n');
+fprintf('|                     REDE PERCEPTRON MÚLTIPLAS CAMADAS                  |\n');
+fprintf('|                         (Prof. Renato Dourado Maia)                    |\n');
+fprintf('|                     Acadêmico: Felipe Túlio de Castro                  |\n');
+fprintf('|                                  FACIT                                 |\n');
+fprintf('+------------------------------------------------------------------------+\n');
+
+disp(' ');
+disp(' ');
+disp('PROBLEMA DE CLASSIFICAÇÃO');
+disp(' ');
+disp(' ');
+disp('O perceptron de múltiplas camadas será treinado...');
+pause
+
+%%Carregamento dos dados de teste e de treino
+load DadosTreinamento.txt;
+load DadosTeste.txt;
+
+%atribuição das matrizes iniciais de treino
+entradas = DadosTreinamento(:,1:4)';
+Yd = DadosTreinamento(:, 5:7)';
+%carregamento dos dados do arquivo de teste
+XValidacao = DadosTeste(:,1:4)';
+YValidacao = DadosTeste(:, 5:7)';
+
+%%chamada da função de treino
+[W1 W2 MatrizdeErros] = treino(0.1, entradas, Yd, 0.000001);
+
+[YClassificacao y numPadroes] = yPMC(XValidacao, W1, W2, YValidacao);
+
+result = YClassificacao == YValidacao;
+
+cont = 0;
+
+ for i = 1 : y
+     if(result(:,i) == 1)
+         cont = cont + 1;
+     end
+ end
+        
+perc = (cont * 100)/numPadroes;
+disp('');
+disp('');
+fprintf('A rede acertou: %6.2f%%\n', perc);
+
+plot(MatrizdeErros);

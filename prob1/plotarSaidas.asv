@@ -1,0 +1,25 @@
+function plotarSaidas( YValidacao, YAuxiliar )
+%PLOTARSAIDAS Summary of this function goes here
+%   Detailed explanation goes here
+    
+    clf
+    plot(ClasseA(1,:), ClasseA(2,:),'or')
+    legend('Classe 1')
+    hold on
+    grid on
+    plot (ClasseB(1,:), ClasseB(2,:), 'ob')
+    legend('Classe 2')
+    legend('Classe1','Classe 2')
+
+
+figure
+plot(YValidacao, '^-')
+hold on
+grid on
+plot(
+xlabel('Época')
+ylabel('Erro Quadrático')
+title('Erro Quadrático Acumulado por Época de Treinamento')
+
+end
+
